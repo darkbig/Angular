@@ -1,0 +1,15 @@
+<?php
+    header("Content-Type:application/json;");
+    $passWord=$_REQUEST['name'];
+    if($passWord=='jack'){
+    $array=[
+        ["name"=>"jack","age"=>15],
+        ["name"=>"rose","age"=>16],
+        ["name"=>"luck","age"=>19]
+    ];
+    $json=json_encode($array);
+    echo($json);
+    }else{
+    echo("{'type':'error'}");
+    }
+?>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+    <button ng-click="callShow()">点击我启用自定义服务</button>
+</div>
+
+<script>
+    var app = angular.module('myModule', ['ng']);
+    app.factory("$show",function(){
+        return{
+            showFunc:function(){//$show服务的方法名
+              alert("我是自定义服务")
+            }
+        }
+    });
+    app.controller('myCtrl', function ($scope,$show) {
+        $scope.callShow=function(){
+            $show.showFunc();
+        }
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+<?php
+    header("Content-Type:application/json;");
+    $array=[
+        ["name"=>"jack","age"=>15],
+        ["name"=>"rose","age"=>16],
+        ["name"=>"luck","age"=>19]
+    ];
+    $json=json_encode($array);
+    echo($json);
+?>

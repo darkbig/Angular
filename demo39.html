@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>bootstrap+NG的表单验证</title>
+    <script src="js/angular.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <script src="js/jquery-1.11.3.js"></script>
+    <style>
+        .main {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            background: rgba(60, 63, 65, 0.3);
+        }
+
+        .con-w {
+            width: 60%;
+            background-color: white;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .fade{
+            z-index:-10;
+            opacity: 0;
+            transition:all linear 0.5s;
+        }
+        .in{
+            z-index:10;
+            opacity: 1;
+
+        }
+    </style>
+<body ng-controller="myCtrl">
+<div>
+    <input ng-click="show()" type="button" class="btn btn-success center-block" value="点击我显示模态框"/>
+</div>
+<div class="main fade" >
+    <div class="container con-w" >
+        <button type="button" class="close" ng-click="show()">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <form name='temp_form' class="form-horizontal" ng-submit="post()"><!--页面布局相当于栅格.container-->
+            <h2 class="text-center text-danger" >注册页面</h2>
+
+            <div class="form-group"><!--页面布局相当于栅格的.row-->
+                <div class="col-xs-2 col-xs-offset-2"><!--页面布局相当于栅格.col-*-*-->
+                    <label class="control-label" for="uname3">用户名：</label>
+                </div>
+                <div class="col-xs-4">
+                    <input ng-model="userName" name="t_name" class="form-control" id="uname3" required ng-minlength="3"
+                           ng-maxlength="16">
+                </div>
+                <div class="col-xs-4">
+                    <span ng-show="temp_form.t_name.$error.minlength || temp_form.t_name.$error.maxlength"
+                          class="help-block">用户密码长度必须再3到16位之间</span>
+                    <span ng-show="temp_form.t_name.$error.required" class="help-block">
+                      姓名不能为空
+                     </span>
+                    <span ng-show="temp_form.t_name.$valid" class="help-block">
+                    验证规则通过
+                     </span>
+                    <span ng-show="temp_form.t_name.$invalid" class="help-block">
+                    验证规则未通过
+                     </span>
+                </div>
+            </div>
+            <div class="form-group"> <!--.row-->
+                <div class="col-xs-2 col-xs-offset-2">
+                    <label class="control-label" for="upwd1">密码：</label>
+                </div>
+                <div class="col-xs-4">
+                    <input type="password" ng-model="userPwd1" class="form-control" name="form_pwd1" id="upwd1" required
+                           ng-minlength="6" ng-maxlength="12">
+                </div>
+                <div class="col-xs-4">
+                    <span ng-show="temp_form.form_pwd1.$error.minlength || temp_form.form_pwd1.$error.maxlength"
+                          class="help-block">用户密码长度必须再6S到12位之间</span>
+                    <span ng-show="temp_form.form_pwd1.$error.required">
+                      密码不能为空
+                    </span>
+                    <span ng-show="temp_form.form_pwd1.$valid" class="help-block">
+                    验证规则通过
+                     </span>
+                    <span ng-show="temp_form.form_pwd1.$invalid" class="help-block">
+                    验证规则未通过
+                     </span>
+                </div>
+            </div>
+            <div class="form-group"> <!--.row-->
+                <div class="col-xs-2 col-xs-offset-2">
+                    <label class="control-label" for="upwd2">重复密码：</label>
+                </div>
+                <div class="col-xs-4">
+                    <input ng-model="userPwd2" name="form_pwd2" class="form-control" id="upwd2" required ng-maxlength="12" ng-minlength="6">
+                </div>
+                <div class="col-xs-4">
+                    <span class="help-block" ng-show="!(userPwd2==userPwd1)">重复密码与密码不一致</span>
+                    <span ng-show="temp_form.form_pwd2.$valid" class="help-block">
+                    验证已通过
+                     </span>
+                    <span class="help-block" ng-show="temp_form.form_pwd2.$invalid">验证规则未通过</span>
+                </div>
+            </div>
+            <!--注意H5规范推荐的复选框和单选框的写法-->
+            <!--SRP:单一责任原则-->
+            <div class="form-group"> <!--.row-->
+                <div class="col-xs-10 col-xs-offset-2">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">七天之内不再登录
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group"> <!--.row-->
+                <div class="col-xs-4 col-xs-offset-4">
+                    <input class="btn btn-success" type="submit" ng-disabled="temp_form.$invalid" value="提交">
+                    <input ng-click="show()" class="btn btn-danger" type="button" value="取消">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    var app = angular.module('myModule', ['ng']);
+
+    app.controller('myCtrl', ["$scope", function ($scope) {
+
+
+        $scope.show = function () {
+           $(".main").toggleClass("in");
+        }
+        $scope.post=function(){
+            alert("请求数据");
+            alert("注册成功");
+            $scope.reg=false;
+        };
+    }]);
+</script>
+<script src="js/bootstrap.js"></script>
+<script>
+    (function () {
+        var s = document.createElement("script");
+        s.onload = function () {
+            bootlint.showLintReportForCurrentDocument([]);
+        };
+        s.src = "js/bootlint.js";
+        document.body.appendChild(s)
+
+    })();
+</script>
+</body>
+</html>

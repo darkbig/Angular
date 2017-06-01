@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ng_hide与ng_show</title>
+    <script src="js/angular.js"></script>
+
+</head>
+<body>
+ <span ng-init="hasMore=true;url='img/s2.jpg'"></span>
+<button ng-show="hasMore">点我加载图片</button>
+<p ng-hide="hasMore">没有更多可以加载了</p>
+ <p ng-bind="url"></p>
+ <p>{{url}}</p>
+ <img ng-src="{{url}}" alt=""/>
+</body>
+</html>

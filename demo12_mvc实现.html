@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/angular.js"></script>
+    <title>MVC的实现</title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <p>{{name}}</p>
+    <p ng-bind="name"></p>
+    <button ng-click="show()"> Click ME</button>
+</div>
+<div>
+    <button ng-click="show()">兄弟元素</button>
+</div>
+<script>
+    var app=angular.module("myApp",['ng']);
+    //声明控制器
+    app.controller('myCtrl',function($scope){
+    /*$scope为作用域对象 服务service，是单例模式对象：
+        1、单例类只能有一个实例。
+        2、单例类必须自己创建自己的唯一实例。
+        3、单例类必须给所有其他对象提供这一实例。
+    */
+        console.log("in myCtrl");
+        $scope.name="华苏大数据产品部";
+        $scope.show=function(){
+            console.log("调用$scope中的 show方法");
+        }
+    });
+</script>
+</body>
+</html>

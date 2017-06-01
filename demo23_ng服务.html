@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+    <p>{{url}}</p>
+    <button ng-click="getUrl()">获取当前地址</button>
+</div>
+
+<script>
+    var app = angular.module('myModule', ['ng']);
+
+    app.controller('myCtrl', function ($scope,$location) {
+        $scope.url="";
+        $scope.getUrl=function(){
+            $scope.url = $location.absUrl();
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--调用myModule模块并启动ng应用-->
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>MVC 扩展</title>
+    <script src="js/angular.js"></script>
+    <style>
+        img{
+            width:100px;
+        }
+        ul>li{
+            float:left;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!--调用这个控制器-->
+    <div ng-controller="myCtrl">
+        <button ng-click="loadMore()">点我加更多商品</button>
+        <ul>
+            <li ng-repeat="obj in disList">
+                <h1>{{ obj.name}}</h1>
+                <h2>{{"价格:"+ obj.price}}</h2>
+                <img ng-src="{{obj.url}}" alt=""/>
+            </li>
+        </ul>
+
+    </div>
+    <script>
+        var app=angular.module('myApp',["ng"]);
+        app.controller("myCtrl",function($scope){
+            $scope.disList=[
+                {name:"鱼包金针菇",url:"img/c1.jpg",price:80},
+                {name:"蒜蓉大虾",url:"img/c2.jpg",price:100},
+                {name:"姜末乌贼",url:"img/c3.jpg",price:60}
+            ];
+            $scope.loadMore=function(){
+                $scope.disList.push({name:"红烧肉片",url:"img/c4.jpg",price:90})
+            }
+        });
+    </script>
+</body>
+</html>

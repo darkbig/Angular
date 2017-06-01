@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+    <button ng-click="show()">点击我是show方法</button>
+    <button ng-click="print()">点击我是print方法</button>
+</div>
+
+<script>
+    var app = angular.module('myModule', ['ng']);
+    app.factory("$show",function(){
+        return{
+            show:function(){
+                alert("factory定义一个方法");
+            }
+        }
+    });
+    app.service("$print",function(){
+        this.print=function(){
+            alert("service 定义一个方法")
+        }
+    });
+    app.controller('myCtrl', function ($scope,$show,$print) {
+        $scope.show=function(){
+            $show.show();
+        };
+        $scope.print=function(){
+            $print.print();
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+    <input ng-model="aaa" type="text" id="change">
+    <span>{{aaa}}</span>
+</div>
+<iframe src="asdas.html"></iframe>
+<script>
+    var app = angular.module('myModule', ['ng']);
+    app.controller('myCtrl', function ($scope) {
+        $scope.aaa = 0;
+    })
+</script>
+
+</body>
+</html>

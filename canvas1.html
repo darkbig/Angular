@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="padding: 10px;background:#002869;">
+<div>
+    <!--宽高比6比4-->
+    <canvas id='ca' width="1000" height="667" style="background: rgba(255,255,155,0)" ></canvas>
+    <script>
+        //data为请求数据
+        var data = [ 'qq','weixin', 'zhifubao', 'baidu', 'kudog', 'sina', 'taobao', 'tenxunshiping', 'toutiao', 'xiecheng'];
+        //本地保存数图片的路劲
+        var imgsrc = {
+            'weixin': 'img/wechat.png',
+            'qq': 'img/qq.png',
+
+            'zhifubao': 'img/anyplay.png',
+
+            'baidu': 'img/baidu.png',
+
+            'kudog': 'img/kudog.png',
+
+            'sina': 'img/sina.png',
+
+            'taobao': 'img/taobao.png',
+            'tenxunshiping': 'img/tenxunshiping.png',
+            'toutiao': 'img/toutiao.png',
+            'xiecheng': 'img/xiecheng.png'
+        };
+        //console.log(imgsrc);
+        //封装圈圈方法
+        function drawquanquan(imgsrc, id, data) {
+            //绘制方法
+            function preImage(url,callback,wo){
+                var img = new Image(); //创建一个Image对象，实现图片的预下载
+                img.src = url;
+                if (img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数
+                    callback.call(img,wo.x,wo.y,wo.width,wo.height);
+                    return; // 直接返回，不用再处理onload事件
+                }
+                img.onload = function () { //图片下载完毕时异步调用callback函数。
+                    callback.call(img,wo.x,wo.y,wo.width,wo.height);//将回调函数的this替换为Image对象
+                };
+            }
+            var ele = document.querySelector('#' + id);
+            var style = window.getComputedStyle ? window.getComputedStyle(ele, null) : null || ele.currentStyle;
+            var width = parseFloat(style.width);
+            var height = parseFloat(style.height);
+            var wo=[{x:width/2-width/5/2,y:height/2-width/5/2,width:width/4,height:width/4},
+                {x:width/2-width/5/2-width/4.9,y:height/2-width/5/2-width/6/2,width:width/4.5,height:width/4.5},
+                {x:width/2+width/6.8,y:height/2-width/5/2+width/5.5/2,width:width/5,height:width/5},
+                {x:width/2-width/5/2-width/6.5,y:height/2+width/25,width:width/5.5,height:width/5.5},
+                {x:width/2-width/5/2+width/4.5,y:height/2-width/5.7,width:width/6,height:width/6},
+                {x:width/2-width/5/2,y:height/2-width/4,width:width/6.5,height:width/6.5},
+                {x:width/2-width/5/2.3,y:height/2+width/6.8,width:width/7,height:width/7},
+                {x:width/2+width/17,y:height/2+width/6.8,width:width/7.5,height:width/7.5},
+                {x:width/2+width/5.2,y:height/2+width/5.2,width:width/8,height:width/8},
+                {x:width/2+width/18.5,y:height/2-width/3.7,width:width/8.5,height:width/8.5},
+            ];
+            //声明canvas绘图工具
+            var ctx = ele.getContext('2d');
+            var img = [];
+            var total = 0;
+            for (var i = 0; i < data.length; i++) {
+                img[i] = imgsrc[data[i]];
+                preImage(imgsrc[data[i]],function(x,y,width,height){
+                    ctx.save();
+                    //ctx.rotate(-20*Math.PI/180);
+                    ctx.drawImage(this,x,y,width,height);
+                    ctx.restore();
+                },wo[i]);
+            }
+            var divmess = document.createElement("div");
+            divmess.style.display = 'none';
+            divmess.style.position = 'fixed';
+            divmess.class='messLike';
+            divmess.style.color='#e4393c';
+            divmess.style.fontSize='16px';
+            divmess.style.border='1px solid #ccc';
+            divmess.style.padding='5px';
+            document.body.appendChild(divmess);
+            ele.onmousemove = function(e) {
+                divmess.style.display = 'none';
+                var x = e.offsetX; //事件相对于事件源的坐标
+                var y = e.offsetY;
+                var cx= e.clientX;
+                var cy= e.clientY;
+                for(var i=0;i<data.length;i++){
+                    if(x>=wo[i].x&&x<=wo[i].x+wo[i].width&&y>=wo[i].y&&y<=wo[i].y+wo[i].height){
+                        console.log(cx,cy)
+                        divmess.style.top=cy+'px';
+                        divmess.style.left=cx+'px';
+                        divmess.style.display='block';
+                        divmess.innerHTML=''+data[i]
+                    }
+                }
+            }
+
+        }
+        drawquanquan(imgsrc, 'ca', data)
+    </script>
+</div>
+</body>
+</html>

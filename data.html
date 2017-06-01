@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body id="aa">
+<script>
+    function getday(){
+    var day = new Date();
+    year= day.getFullYear();
+    month= day.getMonth()+1;
+    date= day.getDate();
+    week = day.getDay();
+    var mycars = new Array('日','一','二','三','四','五','六');
+    var aa1 = mycars[week];
+    var now = '<span>'+year+'</span>'+month+'月'+date+'日';
+        aa.innerHTML=now;
+    }
+    getday()
+</script>
+</body>
+</html>

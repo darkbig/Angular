@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html >
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/angular.js"></script>
+    <title>nginit</title>
+</head>
+<body ng-app="">
+    <table ng-init="wList=[
+    {name:'Rose',sex:'female',salary:'30k'},
+    {name:'Lucy',sex:'female',salary:'25k'},
+    {name:'Jack',sex:'man',salary:'5K'}
+    ]">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>sex</th>
+                <th>salary</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{wList[0].name}}</td>
+            <td>{{wList[0].sex}}</td>
+            <td>{{wList[0].salary}}</td>
+        </tr>
+        <tr>
+            <td>{{wList[1].name}}</td>
+            <td>{{wList[1].sex}}</td>
+            <td>{{wList[1].salary}}</td>
+        </tr>
+        <tr>
+            <td>{{wList[2].name}}</td>
+            <td>{{wList[2].sex}}</td>
+            <td>{{wList[2].salary}}</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

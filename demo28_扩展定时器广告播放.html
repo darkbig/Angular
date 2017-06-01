@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+    <p>{{count}}</p>
+    <img ng-src="img/{{list[index]}}" alt=""/>
+</div>
+
+<script>
+    var app = angular.module('myModule', ['ng']);
+
+    app.controller('myCtrl', function ($scope,$interval) {
+        $scope.list = ['c1.jpg','c2.jpg','c3.jpg'];
+        $scope.index = 0;
+        $scope.count = 0;
+
+
+
+        var t = $interval(function () {
+
+
+            $scope.index++;
+            if($scope.index > 2)
+            {
+                $scope.index = 0;
+            }
+            $scope.count++;
+            if($scope.count > 29)
+            {
+                $interval.cancel(t);
+            }
+
+        },500);
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/angular.js"></script>
+    <title>ngRepeat</title>
+</head>
+<body ng-app="">
+    <ul ng-init="list=[123,345,456]">
+        <!--$index为可以查看遍历的数组的下标，这里的tmp in list 类似与JS语法中的var key in Array遍历-->
+        <li ng-repeat="tmp in list">{{$index}}</li>
+    </ul>
+        <!--$first 如果是重复元素的第一个迭代项则为true-->
+    <ul>
+        <li ng-repeat="tmp in list"> {{$first}}</li>
+    </ul>
+    <!--$middle 如果是在重复元素的第一个和最后一个之间的迭代项则为true 其他请查看手册-->
+    <ul>
+        <li ng-repeat="tmp in list"> {{$middle}}</li>
+    </ul>
+    <!--此外ng补充了for in循环，可以不仅得到index而且还能得到value;-->
+    <ol>
+        <li ng-repeat="(key,value) in list">
+            {{"key is "+key+"value is "+value}}
+        </li>
+    </ol>
+    <!--ngInit定义对象，并且遍历-->
+    <span ng-init="car={name:'凤凰牌自行车',price:'500元'}"></span>
+    <div>
+        <a href="#" ng-repeat="tmp in car">{{tmp}}</a>
+    </div>
+
+    <div>
+        <a href="#" ng-repeat="(key,value) in car">{{key+"："+value}}</a>
+    </div>
+<div></div>
+</body>
+</html>

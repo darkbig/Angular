@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+<button ng-click="show()">点我构造函数创建服务</button>
+</div>
+
+<script>
+    var app = angular.module('myModule', ['ng']);
+    app.service("$worker",function(){
+        this.name='杜勇';
+        this.message=function(){
+            console.log("杜勇的小目标，一个亿");
+        }
+    });
+    app.controller('myCtrl', function ($scope,$worker) {
+        $scope.pople=$worker.name;
+        $scope.show=function(){
+            $worker.message();
+        }
+    })
+</script>
+
+</body>
+</html>
